@@ -5,6 +5,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { z } from "zod";
+
+const formSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+  message: z.string().trim().min(1, "Message is required").max(2000, "Message must be less than 2000 characters"),
+});
 
 const QuestionSection = () => {
   const [formData, setFormData] = useState({
@@ -14,24 +21,46 @@ const QuestionSection = () => {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Create mailto link
-    const mailtoLink = `mailto:example@email.com?subject=Question from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    )}`;
-    
-    window.location.href = mailtoLink;
-    
-    setSubmitted(true);
-    toast.success("Opening your email client...");
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setFormData({ name: "", email: "", message: "" });
-      setSubmitted(false);
-    }, 3000);
+    // Validate form data
+    try {
+      formSchema.parse(formData);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast.error(error.issues[0].message);
+        return;
+      }
+    }
+
+    // Submit to Netlify Forms
+    const form = e.target as HTMLFormElement;
+    const formDataToSend = new FormData(form);
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formDataToSend as any).toString(),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        toast.success("Message sent successfully!");
+        
+        // Reset form after 3 seconds
+        setTimeout(() => {
+          setFormData({ name: "", email: "", message: "" });
+          setSubmitted(false);
+        }, 3000);
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("Failed to send message. Please try again.");
+    }
   };
 
   const handleChange = (
@@ -82,7 +111,18 @@ const QuestionSection = () => {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form 
+                onSubmit={handleSubmit} 
+                className="space-y-6"
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+              >
+                {/* Hidden fields for Netlify Forms */}
+                <input type="hidden" name="form-name" value="contact" />
+                <input type="hidden" name="bot-field" />
+                
                 <div>
                   <Label htmlFor="name" className="text-base">
                     Name
