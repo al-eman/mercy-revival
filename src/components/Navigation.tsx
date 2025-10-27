@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -11,7 +12,7 @@ const Navigation = () => {
     { id: "home", label: "Home" },
     { id: "manifesto", label: "Manifesto" },
     { id: "videos", label: "Videos" },
-    { id: "contact", label: "Question/Suggestion" },
+    { id: "contact", label: "Questions/Suggestions" },
   ];
 
   useEffect(() => {
@@ -59,9 +60,10 @@ const Navigation = () => {
           {/* Logo */}
           <button
             onClick={() => scrollToSection("home")}
-            className="text-2xl font-bold text-primary hover:opacity-80 transition-opacity"
+            className="flex items-center gap-3 hover:opacity-80 transition-opacity"
           >
-            Al-Iman Institute
+            <img src={logo} alt="E Institute" className="h-10 w-10" />
+            <span className="text-2xl font-bold text-primary">E Institute</span>
           </button>
 
           {/* Desktop Navigation */}

@@ -50,7 +50,7 @@ const QuestionSection = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Questions or Suggestions?
+              Questions/Suggestions?
             </h2>
             <p className="text-lg text-muted-foreground">
               We'd love to hear from you. Send us a message and we'll respond as soon as possible.
