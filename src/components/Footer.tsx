@@ -14,8 +14,8 @@ const Footer = () => {
         <div className="flex flex-col items-center space-y-6">
           {/* Logo/Brand */}
           <div className="flex flex-col items-center gap-3">
-            <img src={logo} alt="E Institute" className="h-12 w-12" />
-            <h3 className="text-2xl font-bold">E Institute</h3>
+            <img src={logo} alt="Al Eman Institute" className="h-12 w-12" />
+            <h3 className="text-2xl font-bold">Al Eman Institute</h3>
           </div>
 
           {/* Social Icons */}
@@ -36,7 +36,7 @@ const Footer = () => {
 
           {/* Copyright */}
           <p className="text-sm text-white/70 text-center">
-            © {new Date().getFullYear()} E Institute. All rights reserved.
+            © {new Date().getFullYear()} Al Eman Institute. All rights reserved.
           </p>
         </div>
       </div>

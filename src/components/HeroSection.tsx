@@ -19,9 +19,9 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 py-8 text-center relative z-10 flex flex-col justify-center">
         {/* Logo */}
         <div className="mb-6 md:mb-8 animate-fade-in">
-          <img src={logo} alt="E Institute" className="h-16 md:h-20 w-auto mx-auto mb-4" />
+          <img src={logo} alt="Al Eman Institute" className="h-16 md:h-20 w-auto mx-auto mb-4" />
           <h2 className="text-white text-2xl md:text-4xl font-bold">
-            E Institute
+            Al Eman Institute
           </h2>
         </div>
 

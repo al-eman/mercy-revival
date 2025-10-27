@@ -66,7 +66,7 @@ const ManifestoSection = () => {
           <Card className="p-8 md:p-12 bg-white shadow-lg">
             <div className={language === "urdu" ? "text-right" : "text-left"} dir={language === "urdu" ? "rtl" : "ltr"}>
               <h3 className="text-2xl md:text-3xl font-bold mb-8 text-secondary">
-                {language === "urdu" ? "ای انسٹی ٹیوٹ کا بنیادی مقصد:" : "The Core Mission of E Institute:"}
+                {language === "urdu" ? "ال ایمان انسٹی ٹیوٹ کا بنیادی مقصد:" : "The Core Mission of Al Eman Institute:"}
               </h3>
               
               <ol className="space-y-6">

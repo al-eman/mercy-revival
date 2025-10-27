@@ -62,8 +62,8 @@ const Navigation = () => {
             onClick={() => scrollToSection("home")}
             className="flex items-center gap-3 hover:opacity-80 transition-opacity"
           >
-            <img src={logo} alt="E Institute" className="h-10 w-10" />
-            <span className="text-2xl font-bold text-primary">E Institute</span>
+            <img src={logo} alt="Al Eman Institute" className="h-10 w-10" />
+            <span className="text-2xl font-bold text-primary">Al Eman Institute</span>
           </button>
 
           {/* Desktop Navigation */}
