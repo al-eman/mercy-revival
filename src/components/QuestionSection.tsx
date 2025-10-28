@@ -8,31 +8,43 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 const formSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
-  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
-  message: z.string().trim().min(1, "Message is required").max(2000, "Message must be less than 2000 characters"),
+  name: z
+    .string()
+    .trim()
+    .min(1, "Name is required")
+    .max(100, "Name must be less than 100 characters"),
+  message: z
+    .string()
+    .trim()
+    .min(1, "Message is required")
+    .max(2000, "Message must be less than 2000 characters"),
 });
 
 const QuestionSection = () => {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
 
-    // Validate form data
+    // Validate
     try {
       formSchema.parse(formData);
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        toast.error(error.issues[0].message);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        setError(err.issues[0].message);
+        toast.error(err.issues[0].message);
         return;
       }
     }
+
+    setIsSubmitting(true);
 
     // Submit to Netlify Forms
     const form = e.target as HTMLFormElement;
@@ -47,19 +59,22 @@ const QuestionSection = () => {
 
       if (response.ok) {
         setSubmitted(true);
+        setError(null);
         toast.success("Message sent successfully!");
 
-        // Reset form after 3 seconds
         setTimeout(() => {
-          setFormData({ name: "", email: "", message: "" });
+          setFormData({ name: "", message: "" });
           setSubmitted(false);
         }, 3000);
       } else {
         throw new Error("Form submission failed");
       }
-    } catch (error) {
-      console.error("Error submitting form:", error);
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      setError("Failed to send message. Please try again.");
       toast.error("Failed to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -82,7 +97,8 @@ const QuestionSection = () => {
               Questions/Suggestions?
             </h2>
             <p className="text-lg text-muted-foreground">
-              We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+              We'd love to hear from you. Send us a message and we'll respond as
+              soon as possible.
             </p>
           </div>
 
@@ -123,6 +139,8 @@ const QuestionSection = () => {
                 <input type="hidden" name="form-name" value="contact" />
                 <input type="hidden" name="bot-field" />
 
+                {error && <div className="text-red-600 text-sm">{error}</div>}
+
                 <div>
                   <Label htmlFor="name" className="text-base">
                     Name
@@ -136,22 +154,6 @@ const QuestionSection = () => {
                     onChange={handleChange}
                     className="mt-2"
                     placeholder="Your full name"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="email" className="text-base">
-                    Email
-                  </Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="mt-2"
-                    placeholder="your.email@example.com"
                   />
                 </div>
 
@@ -174,8 +176,9 @@ const QuestionSection = () => {
                   type="submit"
                   size="lg"
                   className="w-full bg-primary hover:bg-primary/90"
+                  disabled={isSubmitting}
                 >
-                  Send Message
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             )}
