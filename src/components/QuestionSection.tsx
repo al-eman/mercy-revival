@@ -68,6 +68,8 @@ const QuestionSection = () => {
           setSubmitted(false);
         }, 3000);
       } else {
+        const txt = await response.text();
+        console.log("Netlify form error response:", txt);
         throw new Error("Form submission failed");
       }
     } catch (err) {
