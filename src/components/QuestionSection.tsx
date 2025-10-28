@@ -99,7 +99,7 @@ const QuestionSection = () => {
               Questions/Suggestions?
             </h2>
             <p className="text-md text-muted-foreground">
-              Send us a message and we'll respond as soon as possible.
+              Send us a message and we'll respond as soon as possible, In Sha Allah.
             </p>
           </div>
 

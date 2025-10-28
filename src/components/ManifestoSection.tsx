@@ -73,9 +73,19 @@ const ManifestoSection = () => {
               lang={language === "urdu" ? "ur" : "en"}
             >
               <h3 className="text-xl md:text-2xl font-bold mb-6 text-secondary">
-                {language === "urdu"
-                  ? "ال ایمان انسٹی ٹیوٹ کا بنیادی مقصد:"
-                  : "The Core Mission of Al Eman Institute:"}
+                {language === "urdu" ? (
+                  <>
+                    بسم اللہ الرحمن الرحیم،
+                    <br />
+                    ال ایمان انسٹی ٹیوٹ کا بنیادی مقصد، باذن اللہ:
+                  </>
+                ) : (
+                  <>
+                    In the name of Allah, the Most Gracious, the Most Merciful,
+                    <br />
+                    The Core Mission of Al Eman Institute, by the will of Allah:
+                  </>
+                )}
               </h3>
 
               <ol className="space-y-5">
