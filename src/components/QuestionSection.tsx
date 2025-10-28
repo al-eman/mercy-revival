@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -39,29 +38,31 @@ const QuestionSection = () => {
     } catch (err) {
       if (err instanceof z.ZodError) {
         setError(err.issues[0].message);
-        toast.error(err.issues[0].message);
         return;
       }
     }
 
     setIsSubmitting(true);
 
-    // Submit to Netlify Forms
     const form = e.target as HTMLFormElement;
-    const formDataToSend = new FormData(form);
+    const nativeFormData = new FormData(form);
+
+    // Ensure form-name is included explicitly for Netlify
+    const payload: Record<string, string> = { "form-name": "contact" };
+    nativeFormData.forEach((value, key) => {
+      payload[key] = String(value);
+    });
 
     try {
       const response = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formDataToSend as any).toString(),
+        body: new URLSearchParams(payload).toString(),
       });
 
       if (response.ok) {
         setSubmitted(true);
         setError(null);
-        toast.success("Message sent successfully!");
-
         setTimeout(() => {
           setFormData({ name: "", message: "" });
           setSubmitted(false);
@@ -72,7 +73,6 @@ const QuestionSection = () => {
     } catch (err) {
       console.error("Error submitting form:", err);
       setError("Failed to send message. Please try again.");
-      toast.error("Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
