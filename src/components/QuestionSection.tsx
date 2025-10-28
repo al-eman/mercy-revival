@@ -23,7 +23,7 @@ const QuestionSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validate form data
     try {
       formSchema.parse(formData);
@@ -48,7 +48,7 @@ const QuestionSection = () => {
       if (response.ok) {
         setSubmitted(true);
         toast.success("Message sent successfully!");
-        
+
         // Reset form after 3 seconds
         setTimeout(() => {
           setFormData({ name: "", email: "", message: "" });
@@ -78,7 +78,7 @@ const QuestionSection = () => {
         <div className="max-w-2xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Questions/Suggestions?
             </h2>
             <p className="text-lg text-muted-foreground">
@@ -111,8 +111,8 @@ const QuestionSection = () => {
                 </p>
               </div>
             ) : (
-              <form 
-                onSubmit={handleSubmit} 
+              <form
+                onSubmit={handleSubmit}
                 className="space-y-6"
                 name="contact"
                 method="POST"
@@ -122,7 +122,7 @@ const QuestionSection = () => {
                 {/* Hidden fields for Netlify Forms */}
                 <input type="hidden" name="form-name" value="contact" />
                 <input type="hidden" name="bot-field" />
-                
+
                 <div>
                   <Label htmlFor="name" className="text-base">
                     Name

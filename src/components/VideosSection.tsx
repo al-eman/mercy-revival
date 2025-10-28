@@ -3,14 +3,18 @@ import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 
 const VideosSection = () => {
-  // Placeholder video IDs - replace with actual YouTube video IDs
+  // Use the provided YouTube URL for all embeds and link
+  const videoUrl =
+    "https://www.youtube.com/watch?v=f-wtTRKLydc&list=PLCM7MOK2Juq5NPwX-79-FJR-p-zoSsf6g&index=17";
+  const embedUrl = "https://www.youtube.com/embed/f-wtTRKLydc";
+
   const videos = [
-    { id: "dQw4w9WgXcQ", title: "Video 1" },
-    { id: "dQw4w9WgXcQ", title: "Video 2" },
-    { id: "dQw4w9WgXcQ", title: "Video 3" },
-    { id: "dQw4w9WgXcQ", title: "Video 4" },
-    { id: "dQw4w9WgXcQ", title: "Video 5" },
-    { id: "dQw4w9WgXcQ", title: "Video 6" },
+    { id: embedUrl, title: "Featured Video 1" },
+    { id: embedUrl, title: "Featured Video 2" },
+    { id: embedUrl, title: "Featured Video 3" },
+    { id: embedUrl, title: "Featured Video 4" },
+    { id: embedUrl, title: "Featured Video 5" },
+    { id: embedUrl, title: "Featured Video 6" },
   ];
 
   return (
@@ -19,10 +23,10 @@ const VideosSection = () => {
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
               Watch Our Latest Videos
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
               Explore our collection of inspiring Islamic content
             </p>
           </div>
@@ -36,7 +40,7 @@ const VideosSection = () => {
               >
                 <div className="relative aspect-video bg-muted">
                   <iframe
-                    src={`https://www.youtube.com/embed/${video.id}`}
+                    src={video.id}
                     title={video.title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
@@ -55,7 +59,7 @@ const VideosSection = () => {
               asChild
             >
               <a
-                href="https://youtube.com"
+                href={videoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2"

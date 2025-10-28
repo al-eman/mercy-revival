@@ -39,10 +39,10 @@ const ManifestoSection = () => {
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-5">
               Our Manifesto
             </h2>
-            
+
             {/* Language Toggle */}
             <div className="inline-flex gap-2 p-1 bg-white rounded-lg shadow-sm">
               <Button
@@ -64,22 +64,33 @@ const ManifestoSection = () => {
 
           {/* Manifesto Content */}
           <Card className="p-8 md:p-12 bg-white shadow-lg">
-            <div className={language === "urdu" ? "text-right" : "text-left"} dir={language === "urdu" ? "rtl" : "ltr"}>
-              <h3 className="text-2xl md:text-3xl font-bold mb-8 text-secondary">
-                {language === "urdu" ? "ال ایمان انسٹی ٹیوٹ کا بنیادی مقصد:" : "The Core Mission of Al Eman Institute:"}
+            <div
+              className={
+                (language === "urdu" ? "text-right" : "text-left") +
+                (language === "urdu" ? " font-urdu urdu-sm" : "")
+              }
+              dir={language === "urdu" ? "rtl" : "ltr"}
+              lang={language === "urdu" ? "ur" : "en"}
+            >
+              <h3 className="text-xl md:text-2xl font-bold mb-6 text-secondary">
+                {language === "urdu"
+                  ? "ال ایمان انسٹی ٹیوٹ کا بنیادی مقصد:"
+                  : "The Core Mission of Al Eman Institute:"}
               </h3>
-              
-              <ol className="space-y-6">
-                {(language === "urdu" ? urduManifesto : englishManifesto).map((point, index) => (
-                  <li key={index} className="flex gap-4 items-start">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold text-sm">
-                      {index + 1}
-                    </span>
-                    <p className="text-lg leading-relaxed text-foreground flex-1 pt-1">
-                      {point}
-                    </p>
-                  </li>
-                ))}
+
+              <ol className="space-y-5">
+                {(language === "urdu" ? urduManifesto : englishManifesto).map(
+                  (point, index) => (
+                    <li key={index} className="flex gap-4 items-start">
+                      <span className="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-semibold text-xs">
+                        {index + 1}
+                      </span>
+                      <p className="text-base md:text-lg leading-relaxed text-foreground flex-1 pt-1">
+                        {point}
+                      </p>
+                    </li>
+                  )
+                )}
               </ol>
             </div>
           </Card>

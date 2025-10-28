@@ -1,0 +1,30 @@
+# Netlify configuration file
+# This file tells Netlify how to build and deploy your site
+
+[build]
+  # Command to build your site
+  command = "npm run build"
+
+  # Directory containing the build output
+  publish = "dist"
+
+  # Node version to use (optional, but ensures consistency)
+  [build.environment]
+    NODE_VERSION = "18"
+
+# Redirect rules for SPA (Single Page Application)
+# This ensures that all routes work properly with client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
 All colors MUST be HSL.
 */
 
@@ -94,7 +94,7 @@ All colors MUST be HSL.
     --sidebar-primary: 224.3 76.3% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 210 40% 98%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
@@ -115,7 +115,34 @@ All colors MUST be HSL.
     overflow-x: hidden;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-semibold;
   }
+}
+
+/* Responsive hero background images */
+.hero-bg {
+  background-image: url("https://i.postimg.cc/PrMv0QTX/nature-wallpaper-landscaep.jpg");
+}
+
+@media (max-width: 768px) {
+  .hero-bg {
+    background-image: url("https://i.postimg.cc/JhvpJqBF/naturrewallapeprphone.jpg");
+  }
+}
+
+/* Smaller Urdu text utility if needed */
+.urdu-sm {
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+/* 25% smaller Urdu text for hero */
+.urdu-25 {
+  font-size: 0.75em;
 }

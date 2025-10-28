@@ -3,41 +3,36 @@ import logo from "@/assets/logo.png";
 
 const Footer = () => {
   const socialLinks = [
-    { icon: Youtube, url: "https://youtube.com", label: "YouTube" },
+    {
+      icon: Youtube,
+      url: "https://www.youtube.com/watch?v=f-wtTRKLydc&list=PLCM7MOK2Juq5NPwX-79-FJR-p-zoSsf6g&index=17",
+      label: "YouTube",
+    },
     { icon: Instagram, url: "https://instagram.com", label: "Instagram" },
     { icon: Facebook, url: "https://facebook.com", label: "Facebook" },
   ];
 
   return (
-    <footer className="bg-foreground text-white py-12">
+    <footer className="bg-secondary text-white py-8">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center space-y-6">
-          {/* Logo/Brand */}
-          <div className="flex flex-col items-center gap-3">
-            <img src={logo} alt="Al Eman Institute" className="h-12 w-12" />
-            <h3 className="text-2xl font-bold">Al Eman Institute</h3>
-          </div>
-
-          {/* Social Icons */}
-          <div className="flex items-center gap-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm md:text-base">
+            © {new Date().getFullYear()} Al Eman Institute. All rights reserved.
+          </p>
+          <div className="flex items-center gap-4">
             {socialLinks.map((social) => (
               <a
                 key={social.label}
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-primary transition-colors"
+                className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors"
                 aria-label={social.label}
               >
-                <social.icon className="w-6 h-6" />
+                <social.icon className="w-5 h-5" />
               </a>
             ))}
           </div>
-
-          {/* Copyright */}
-          <p className="text-sm text-white/70 text-center">
-            © {new Date().getFullYear()} Al Eman Institute. All rights reserved.
-          </p>
         </div>
       </div>
     </footer>

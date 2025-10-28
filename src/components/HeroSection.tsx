@@ -3,7 +3,11 @@ import logo from "@/assets/logo.png";
 
 const HeroSection = () => {
   const socialLinks = [
-    { icon: Youtube, url: "https://youtube.com", label: "YouTube" },
+    {
+      icon: Youtube,
+      url: "https://www.youtube.com/watch?v=f-wtTRKLydc&list=PLCM7MOK2Juq5NPwX-79-FJR-p-zoSsf6g&index=17",
+      label: "YouTube",
+    },
     { icon: Instagram, url: "https://instagram.com", label: "Instagram" },
     { icon: Facebook, url: "https://facebook.com", label: "Facebook" },
   ];
@@ -11,32 +15,31 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="min-h-[100dvh] flex items-center justify-center pt-20 pb-8 relative overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, hsl(var(--hero-gradient-start)) 0%, hsl(var(--hero-gradient-end)) 100%)",
-      }}
+      className="min-h-[100dvh] flex items-center justify-center pt-20 pb-8 relative overflow-hidden hero-bg bg-cover bg-center"
     >
-      <div className="container mx-auto px-4 py-8 text-center relative z-10 flex flex-col justify-center">
-        {/* Logo */}
-        <div className="mb-6 md:mb-8 animate-fade-in">
-          <img src={logo} alt="Al Eman Institute" className="h-16 md:h-20 w-auto mx-auto mb-4" />
-          <h2 className="text-white text-2xl md:text-4xl font-bold">
-            Al Eman Institute
-          </h2>
-        </div>
+      {/* Thin black overlay for readability */}
+      <div className="absolute inset-0 bg-black/25" />
 
+      <div className="container mx-auto px-4 py-8 text-center relative z-10 flex flex-col justify-center">
         {/* English Slogan */}
-        <h1 className="text-white text-2xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 md:mb-6 animate-fade-in">
+        <h1 className="text-white text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-3 md:mb-5 animate-fade-in">
           Connecting Hearts to Allah
         </h1>
-        <h2 className="text-white/90 text-xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-6 md:mb-8 animate-fade-in">
-          Reviving the Mercy of the Prophet ﷺ
+        <h2 className="text-white/90 text-2xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-5 md:mb-7 animate-fade-in">
+          Reviving the Mercy of the Prophet{" "}
+          <span className="text-xs md:text-sm lg:text-base align-baseline">
+            ﷺ
+          </span>
         </h2>
 
         {/* Urdu Slogan */}
-        <div className="mb-6 md:mb-8 animate-fade-in" dir="rtl">
-          <p className="text-white text-lg md:text-3xl lg:text-4xl font-semibold leading-relaxed">
-            دلوں کو اللہ سے جوڑنا — نبی ﷺ کی رحمت کو زندہ کرنا
+        <div className="mb-6 md:mb-8 animate-fade-in" dir="rtl" lang="ur">
+          <p className="text-white text-lg md:text-3xl lg:text-4xl font-semibold leading-relaxed font-urdu urdu-25">
+            دلوں کو اللہ سے جوڑنا — نبی{" "}
+            <span className="text-xs md:text-sm lg:text-base align-baseline">
+              ﷺ
+            </span>{" "}
+            کی رحمت کو زندہ کرنا
           </p>
         </div>
 
