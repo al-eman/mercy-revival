@@ -36,8 +36,8 @@ const HeroSection = () => {
         <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-3 md:mb-5 animate-fade-in">
           Connecting Hearts to Allah
         </h1>
-        <h2 className="text-white/90 text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-5 md:mb-7 animate-fade-in">
-          Spreading the Mercy of the Prophet{" "}
+        <h2 className="text-white/90 text-2xl md:text-3xl lg:text-4xl font-semibold font-italic leading-tight mb-4 md:mb-6 animate-fade-in">
+           <i>Spreading the Mercy of the Prophet{" "}</i>
           <span className="text-md md:text-md lg:lg align-baseline">
             ﷺ
           </span>
