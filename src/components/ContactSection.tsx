@@ -2,8 +2,44 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 const ContactSection = () => {
+  const [status, setStatus] = useState<
+    "idle" | "success" | "error" | "submitting"
+  >("idle");
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setStatus("submitting");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": "contact",
+          name: String(formData.get("name") || ""),
+          message: String(formData.get("message") || ""),
+          // honeypot (if any)
+          "bot-field": String(formData.get("bot-field") || ""),
+        }).toString(),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch (e) {
+      setStatus("error");
+    }
+  }
+
   return (
     <section id="contact" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -24,6 +60,7 @@ const ContactSection = () => {
               data-netlify="true"
               data-netlify-honeypot="bot-field"
               className="space-y-5"
+              onSubmit={handleSubmit}
             >
               {/* Required hidden input for Netlify */}
               <input type="hidden" name="form-name" value="contact" />
@@ -56,13 +93,24 @@ const ContactSection = () => {
                 />
               </div>
 
-              <div className="pt-2">
+              <div className="pt-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <Button
                   type="submit"
-                  className="w-full md:w-auto bg-primary hover:bg-primary/90"
+                  className="w-full sm:w-auto bg-primary hover:bg-primary/90"
+                  disabled={status === "submitting"}
                 >
-                  Send Message
+                  {status === "submitting" ? "Sending..." : "Send Message"}
                 </Button>
+                {status === "success" && (
+                  <span className="text-green-600 text-sm">
+                    Thank you! Your message has been sent.
+                  </span>
+                )}
+                {status === "error" && (
+                  <span className="text-red-600 text-sm">
+                    Failed to send message. Please try again.
+                  </span>
+                )}
               </div>
             </form>
           </Card>
