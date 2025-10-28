@@ -19,7 +19,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ["Montserrat", "sans-serif"],
         // Add Urdu Nastaliq font family
         urdu: ['"Noto Nastaliq Urdu"', "serif"],
       },

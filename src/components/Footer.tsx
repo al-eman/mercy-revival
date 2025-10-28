@@ -5,11 +5,22 @@ const Footer = () => {
   const socialLinks = [
     {
       icon: Youtube,
-      url: "https://www.youtube.com/watch?v=f-wtTRKLydc&list=PLCM7MOK2Juq5NPwX-79-FJR-p-zoSsf6g&index=17",
+      url: "https://www.youtube.com/@Al-Eman-Institute",
       label: "YouTube",
+      color: "text-[#FF0000]",
     },
-    { icon: Instagram, url: "https://instagram.com", label: "Instagram" },
-    { icon: Facebook, url: "https://facebook.com", label: "Facebook" },
+    {
+      icon: Instagram,
+      url: "https://www.instagram.com/alemaninstitute/",
+      label: "Instagram",
+      color: "text-[#E1306C]",
+    },
+    {
+      icon: Facebook,
+      url: "https://www.facebook.com/profile.php?id=61582602227867",
+      label: "Facebook",
+      color: "text-[#1877F2]",
+    },
   ];
 
   return (
@@ -26,10 +37,10 @@ const Footer = () => {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors"
+                className="bg-white text-black hover:bg-white/90 p-2 rounded-full transition-colors"
                 aria-label={social.label}
               >
-                <social.icon className="w-5 h-5" />
+                <social.icon className={`w-5 h-5 ${social.color}`} />
               </a>
             ))}
           </div>
